@@ -22,7 +22,11 @@ class Home extends React.Component {
     return (
       <div>
         <h1>Movies App</h1>
-        {!isAddMode && !movieToAdd ? <MovieList /> : <EditMovie />}
+        {!isAddMode && !movieToAdd ? (
+          <MovieList movies={movies} />
+        ) : (
+          <EditMovie />
+        )}
       </div>
     );
   }
