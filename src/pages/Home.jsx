@@ -12,7 +12,7 @@ class Home extends React.Component {
     this.state = {
       movies: initialMovies,
       isAddMode: false,
-      movieToAdd: null,
+      movieToEdit: null,
     };
   }
 
@@ -29,16 +29,34 @@ class Home extends React.Component {
         )
       : initialMovies;
 
+  onAddMovie = () => {
+    this.setState(() => ({
+      isAddMode: true,
+    }));
+  };
+
+  addMovie = (movie) => {
+    const movies = [...this.state.movies, movie];
+    this.setState(() => ({
+      movies,
+      isAddMode: false
+    }));
+  };
+
   render() {
-    const { movies, isAddMode, movieToAdd } = this.state;
+    const { movies, isAddMode, movieToEdit } = this.state;
 
     return (
       <main>
         <h1>Movies App</h1>
-        {!isAddMode && !movieToAdd ? (
-          <MovieList movies={movies} onSearch={this.onSearch} />
+        {!isAddMode && !movieToEdit ? (
+          <MovieList
+            movies={movies}
+            onSearch={this.onSearch}
+            onAddMovie={this.onAddMovie}
+          />
         ) : (
-          <EditMovie />
+          <EditMovie addMovie={this.addMovie} />
         )}
       </main>
     );
