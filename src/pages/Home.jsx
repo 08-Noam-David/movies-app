@@ -20,14 +20,14 @@ class Home extends React.Component {
     const { movies, isAddMode, movieToAdd } = this.state;
 
     return (
-      <div>
+      <main>
         <h1>Movies App</h1>
         {!isAddMode && !movieToAdd ? (
           <MovieList movies={movies} />
         ) : (
           <EditMovie />
         )}
-      </div>
+      </main>
     );
   }
 }
