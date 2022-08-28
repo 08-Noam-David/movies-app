@@ -5,15 +5,15 @@ import Preview from './Preview.jsx';
 
 class MovieList extends React.Component {
   render() {
-    const { movies } = this.props;
+    const { movies, onSearch } = this.props;
 
     return (
       <section>
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
         <ul>
           {movies.map((m) => (
-            <li>
-              <Preview movie={m} key={m.id} />
+            <li key={m.id}>
+              <Preview movie={m} />
             </li>
           ))}
         </ul>

@@ -16,6 +16,19 @@ class Home extends React.Component {
     };
   }
 
+  onSearch = (query) => {
+    this.setState(() => ({
+      movies: this.searchMovies(query),
+    }));
+  };
+
+  searchMovies = (query) =>
+    query
+      ? initialMovies.filter((movie) =>
+          movie.name.toLowerCase().includes(query.toLowerCase())
+        )
+      : initialMovies;
+
   render() {
     const { movies, isAddMode, movieToAdd } = this.state;
 
@@ -23,7 +36,7 @@ class Home extends React.Component {
       <main>
         <h1>Movies App</h1>
         {!isAddMode && !movieToAdd ? (
-          <MovieList movies={movies} />
+          <MovieList movies={movies} onSearch={this.onSearch} />
         ) : (
           <EditMovie />
         )}
